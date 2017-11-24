@@ -19,7 +19,6 @@
         endA = 0.f;
         self.backgroundColor = [UIColor clearColor];
         self.hidden = YES;
-        UIButton *btn;
     }
     return self;
 }
