@@ -19,7 +19,6 @@
         endA = 0.f;
         self.backgroundColor = [UIColor clearColor];
         self.hidden = YES;
-        UIButton *btn;
     }
     return self;
 }
@@ -28,6 +27,8 @@
     self.hidden = NO;
     if (!timer) {
         [self startR];
+//        timer = [[TestTModel alloc] init];
+//        [timer startT:self selecter:@selector(roatation:)];
         timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(roatation:) userInfo:nil repeats:YES];
     }
 }
@@ -35,34 +36,37 @@
 {
     self.hidden = YES;
     if (timer) {
-        [timer invalidate];
+//        [timer invalidate];
         timer = nil;
         [self.layer removeAllAnimations];
     }
 }
+static int a = 0;
 - (void)roatation:(NSTimer *)t
 {
-    endA += M_PI/40;
-    if (endA > M_PI*2*3/4)
-    {
-        endA = M_PI/4;
-        startA = M_PI/7;
-    }
-
-    [self setNeedsDisplay];
+    a ++;
+    NSLog(@"aaa==== %zd",a);
+//    endA += M_PI/40;
+//    if (endA > M_PI*2*3/4)
+//    {
+//        endA = M_PI/4;
+//        startA = M_PI/7;
+//    }
+//
+//    [self setNeedsDisplay];
     
 }
 - (void)startR
 {
-    CABasicAnimation *basic = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-    basic.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
-    basic.removedOnCompletion = NO;
-    basic.duration = 1;
-    basic.repeatCount = INFINITY;
-    basic.fromValue = @(0);
-    basic.toValue = @(M_PI*2);
-    basic.fillMode = kCAFillModeForwards;
-    [self.layer addAnimation:basic forKey:nil];
+//    CABasicAnimation *basic = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+//    basic.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+//    basic.removedOnCompletion = NO;
+//    basic.duration = 1;
+//    basic.repeatCount = INFINITY;
+//    basic.fromValue = @(0);
+//    basic.toValue = @(M_PI*2);
+//    basic.fillMode = kCAFillModeForwards;
+//    [self.layer addAnimation:basic forKey:nil];
 }
 - (void)drawRect:(CGRect)rect
 {
