@@ -30,6 +30,7 @@
         [self.target performSelector:self.select];
     }
     else {
+        // 务必在当前线程调用invalidate方法,使得Runloop释放对timer的强引用
         [self.weakTimer invalidate];
         self.weakTimer = nil;
     }

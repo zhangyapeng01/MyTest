@@ -26,8 +26,9 @@
     if (self.target) {
         [self.target performSelector:self.selector withObject:timer.userInfo];
     } else {
-        
+        // 务必在当前线程调用invalidate方法,使得Runloop释放对timer的强引用
         [self.timer invalidate];
+        self.timer = nil;
     }
 }
 - (void)dealloc

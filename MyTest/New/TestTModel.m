@@ -40,7 +40,9 @@
     if ([_weak_target respondsToSelector:_selector]) {
         [_weak_target performSelector:_selector];
     }else{
+        // 务必在当前线程调用invalidate方法,使得Runloop释放对timer的强引用
         [timer invalidate];
+        timer = nil;
     }
 }
 
