@@ -7,7 +7,15 @@
 //
 
 #import "LoadingView.h"
+#import "TestTModel.h"
+#import "TimerWeakTarget.h"
+#import "ZWeakTimer.h"
 
+@interface LoadingView ()
+{
+   TestTModel* timer;
+}
+@end
 @implementation LoadingView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -27,46 +35,49 @@
     self.hidden = NO;
     if (!timer) {
         [self startR];
+        ZWeakTimer *weaktimer = [[ZWeakTimer alloc] init];
+        [weaktimer doTimerWithTarget:self selecter:@selector(roatation)];
 //        timer = [[TestTModel alloc] init];
-//        [timer startT:self selecter:@selector(roatation:)];
-        timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(roatation:) userInfo:nil repeats:YES];
+//        __weak LoadingView *weakS = self;
+//        [timer scheduleTimerWithTimerInternal:0.5 target:weakS selector:@selector(roatation) userInfo:nil repeats:YES];
+//        timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(roatation:) userInfo:nil repeats:YES];
+//        [TimerWeakTarget scheduledTimerWithTimeInterval:0.5 target:weakS selector:@selector(roatation) userInfo:nil repeats:YES];
     }
 }
 - (void)cancelLoading
 {
     self.hidden = YES;
     if (timer) {
-//        [timer invalidate];
         timer = nil;
         [self.layer removeAllAnimations];
     }
 }
 static int a = 0;
-- (void)roatation:(NSTimer *)t
+- (void)roatation
 {
-    a ++;
-    NSLog(@"aaa==== %zd",a);
-//    endA += M_PI/40;
-//    if (endA > M_PI*2*3/4)
-//    {
-//        endA = M_PI/4;
-//        startA = M_PI/7;
-//    }
-//
-//    [self setNeedsDisplay];
+//    a ++;
+//    NSLog(@"aaa==== %zd",a);
+    endA += M_PI/40;
+    if (endA > M_PI*2*3/4)
+    {
+        endA = M_PI/4;
+        startA = M_PI/7;
+    }
+
+    [self setNeedsDisplay];
     
 }
 - (void)startR
 {
-//    CABasicAnimation *basic = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-//    basic.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
-//    basic.removedOnCompletion = NO;
-//    basic.duration = 1;
-//    basic.repeatCount = INFINITY;
-//    basic.fromValue = @(0);
-//    basic.toValue = @(M_PI*2);
-//    basic.fillMode = kCAFillModeForwards;
-//    [self.layer addAnimation:basic forKey:nil];
+    CABasicAnimation *basic = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    basic.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
+    basic.removedOnCompletion = NO;
+    basic.duration = 1;
+    basic.repeatCount = INFINITY;
+    basic.fromValue = @(0);
+    basic.toValue = @(M_PI*2);
+    basic.fillMode = kCAFillModeForwards;
+    [self.layer addAnimation:basic forKey:nil];
 }
 - (void)drawRect:(CGRect)rect
 {

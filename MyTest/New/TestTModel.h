@@ -8,7 +8,10 @@
 #import <Foundation/Foundation.h>
 
 @interface TestTModel : NSObject
-@property (nonatomic, weak)NSTimer *aTimer;
-- (void)startT:(id)target selecter:(SEL)s;
-
+@property (nonatomic, strong)NSTimer *aTimer;
+-(void)scheduleTimerWithTimerInternal:(NSTimeInterval)interval
+                               target:(id)target
+                             selector:(SEL)aSelector
+                             userInfo:(id)userInfo
+                              repeats:(BOOL)repeats;
 @end

@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "TestTModel.h"
 @interface LoadingView : UIView
 {
-    TestTModel* timer;
+    
     CGFloat startA;
     CGFloat endA;
     
